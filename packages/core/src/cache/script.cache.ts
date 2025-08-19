@@ -123,3 +123,9 @@ export function deleteBeatByBlockId(blockId: string): void {
 export function deleteBeatsByParentId(parentBlockId: string): void {
   getDb().prepare(`DELETE FROM script_beats WHERE parent_block_id = ?`).run(parentBlockId);
 }
+
+export function listBeatsByScriptId(scriptBlockId: string): ScriptBeat[] {
+  return getDb()
+    .prepare(`SELECT * FROM script_beats WHERE script_block_id = ? ORDER BY index ASC`)
+    .all(scriptBlockId) as ScriptBeat[];
+}

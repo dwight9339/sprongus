@@ -5,3 +5,5 @@ export * as Storyboard from "./storyboard";
 export * as Sync from "./sync";
 export * as Project from "./project";
 export * as Script from "./script";
+export * as Export from "./export";
+
