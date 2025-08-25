@@ -1,16 +1,15 @@
-// TODO: Implement script exporter interface
-
 /* Core types used by the exporters */
-import { ScriptDocument } from "../script";            // your existing shape
-import { StoryboardRow } from "../storyboard";        // canonical row type
-import { AuxTableRecord } from "../cache/auxTable.cache";   // generic aux entry
+import { ScriptDocument } from "../script"; // your existing shape
+import { StoryboardRow } from "../storyboard"; // canonical row type
+import { AuxTableRecord } from "../cache/auxTable.cache"; // generic aux entry
+import { markdownExporter } from "./markdown.exporter";
 
 /* ─────────── Interfaces ─────────── */
 
 export interface ScriptExportOptions {
   lineBreak?: "\n" | "\r\n";
   includeIds?: boolean;
-  [key: string]: unknown;                 // exporter-specific flags
+  [key: string]: unknown; // exporter-specific flags
 }
 
 export interface ScriptExporter {
@@ -37,18 +36,17 @@ export interface TableExporter {
 
 /* ─────────── Registry & resolver ─────────── */
 
-// import { plainTextExporter }   from "./plainText.exporter";
-// import { markdownExporter }    from "./script/markdown.exporter";
+const scriptRegistry = {
+  markdown: markdownExporter
+} as const;
 
-// const scriptRegistry = {
-//   "plain-text": plainTextExporter,
-//   markdown:      markdownExporter
-// } as const;
+export type ScriptExporterId = keyof typeof scriptRegistry;
 
-// export type ScriptExporterId = keyof typeof scriptRegistry;
+export function resolveScriptExporter(id: ScriptExporterId): ScriptExporter {
+  return scriptRegistry[id];
+}
 
-// export function resolveScriptExporter(id: ScriptExporterId): ScriptExporter {
-//   return scriptRegistry[id];
-// }
+export { markdownExporter };
 
 /* You can create a similar registry for TableExporter if you like */
+

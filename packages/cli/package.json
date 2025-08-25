@@ -60,6 +60,9 @@
       },
       "project": {
         "description": "Configure Notion projects"
+      },
+      "script": {
+        "description": "Work with cached scripts"
       }
     }
   },
