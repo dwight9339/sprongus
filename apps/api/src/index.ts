@@ -1,10 +1,10 @@
 import Fastify from "fastify";
-import {pathToFileURL} from "url";
+import { pathToFileURL } from "url";
 
 export function buildServer() {
-  const app = Fastify({logger: true});
+  const app = Fastify({ logger: true });
 
-  app.get("/health", () => ({ok: true}));
+  app.get("/health", () => ({ ok: true }));
 
   return app;
 }
@@ -14,7 +14,7 @@ async function start() {
   const port = Number(process.env.PORT ?? 3000);
   const host = process.env.HOST ?? "0.0.0.0";
   try {
-    await app.listen({port, host});
+    await app.listen({ port, host });
     app.log.info(`API listening on http://${host}:${port}`);
   } catch (err) {
     app.log.error(err);

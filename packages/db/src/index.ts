@@ -9,4 +9,3 @@ export function createClient(): DatabaseClient {
   // TODO: initialize a Drizzle client (e.g., with Postgres/SQLite)
   return {} as DatabaseClient;
 }
-
