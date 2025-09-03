@@ -1,0 +1,19 @@
+{
+  "name": "sprongus",
+  "version": "0.0.0",
+  "description": "A script-storyboard syncing utility.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dwight9339/sprongus.git"
+  },
+  "author": "David White",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/dwight9339/sprongus/issues"
+  },
+  "homepage": "https://github.com/dwight9339/sprongus#readme"
+}
