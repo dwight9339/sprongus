@@ -12,9 +12,7 @@
       "settings": {
         "terminal.integrated.defaultProfile.linux": "bash"
       },
-      "extensions": [
-        "ms-vscode.vscode-typescript-next"
-      ]
+      "extensions": ["ms-vscode.vscode-typescript-next"]
     }
   },
   "mounts": [
