@@ -17,6 +17,15 @@ Quick Start
 - Lint/format: `pnpm lint` / `pnpm format`
 - Tests: `pnpm test`
 
+Environment
+
+- Copy `.env.example` to `.env` and adjust as needed for local services.
+- `docker compose up -d` starts Postgres, Redis, and MinIO for development.
+- In the Dev Container, the container is attached to the same Docker network (`sprongus_net`). Use service hostnames:
+  - `DATABASE_URL=postgres://postgres:postgres@postgres:5432/sprongus`
+  - `REDIS_URL=redis://redis:6379`
+  - `S3_ENDPOINT=http://minio:9000`
+
 Run Apps
 
 - API
@@ -44,6 +53,12 @@ Development
 - Hooks: Husky + lint-staged.
   - `pre-commit`: lints and formats staged files.
   - `commit-msg`: Conventional Commits via commitlint.
+  - Tests run on commit to catch regressions.
+
+CI & Releases
+
+- CI (GitHub Actions): installs deps, lints, typechecks, builds, and tests on PRs.
+- Changesets: versioning and release PRs. Use `pnpm changeset` to create changesets.
 
 Scripts (root)
 
