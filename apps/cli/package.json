@@ -1,0 +1,30 @@
+{
+  "name": "@sprongus/cli",
+  "version": "0.0.0",
+  "description": "Sprongus command-line interface (oclif)",
+  "license": "MIT",
+  "private": false,
+  "type": "module",
+  "bin": {
+    "sprongus": "./dist/bin/run.js"
+  },
+  "main": "./dist/bin/run.js",
+  "files": [
+    "dist"
+  ],
+  "exports": {
+    ".": "./dist/bin/run.js"
+  },
+  "oclif": {
+    "bin": "sprongus",
+    "commands": "./dist/commands"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "typecheck": "tsc -p tsconfig.build.json --noEmit",
+    "start": "node ./dist/bin/run.js"
+  },
+  "dependencies": {
+    "@oclif/core": "^3.27.0"
+  }
+}

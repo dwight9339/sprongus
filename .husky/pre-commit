@@ -1,0 +1,5 @@
+#!/usr/bin/env sh
+pnpm lint-staged
+
+# Run unit tests on commit
+pnpm test
