@@ -11,6 +11,25 @@ We need to initialize the pnpm monorepo for the project.
 
 Set up the root workspace and stub out initial workspaces (apps + packages). Configure QA infra (linting, style checking, unit tests, commit quality), dev containers, and Docker Compose for local services. Add CI workflows and basic project hygiene (env management, docs, licensing, release/versioning).
 
+## Runtime & Tooling Baseline
+
+- Datastores:
+  - CLI uses local SQLite (driver: `better-sqlite3`).
+  - API uses Postgres.
+- ORM & Migrations: Drizzle ORM + drizzle-kit with per-dialect migration folders (e.g., `drizzle/sqlite`, `drizzle/pg`).
+- Validation: Zod everywhere (Core and API). Optionally use `fastify-type-provider-zod` for route schemas.
+- API base URL: CLI `--remote` defaults to `SPRONGUS_API_URL` or `http://localhost:3000`.
+- Project selection precedence (CLI): explicit `--project` arg → `SPRONGUS_PROJECT` env → ConfigKV `project.active`.
+- JSON columns: TEXT in SQLite; JSONB in Postgres (consistent stringification/parsing in Core services).
+
+## Dependencies (baseline)
+
+- Workspace deps to add as slices land:
+  - `@sprongus/db`: `drizzle-orm`, `drizzle-kit`, `better-sqlite3`, `pg`.
+  - `@sprongus/core`: `zod`.
+  - `@sprongus/api`: `zod` (optional `fastify-type-provider-zod`).
+  - `@sprongus/cli`: depends on `@sprongus/core` and `@sprongus/db`.
+
 ## To-Do
 
 - [x] Devcontainer: .devcontainer/devcontainer.json with Node 20+, pnpm, and extensions

@@ -12,11 +12,17 @@ Implement the Script slice that:
 3. Diffs against the local cache.
 4. Updates storage and emits changes. Support push (where the provider allows it) and exporters. Expose the functionality via CLI and API, and wire into the Run/job system for long operations.
 
+Runtime model:
+
+- CLI: local SQLite storage for script caches and indexes.
+- API: Postgres storage for multi-user/remote.
+
 ## Scope
 
 - DB: Introduce minimal, portable tables for script caching and versioning (SQLite for CLI; Postgres for API). JSON is TEXT in SQLite and JSONB in Postgres.
 - Core: Define contracts (Provider, StyleParser, StructurePreset), ScriptDocument model, parsing/diff/hashing, and an orchestration service.
-- CLI: Commands to pull/push/export/show scripts, plus status helpers; support `-remote`.
+- CLI: Commands to pull/push/export/show scripts, plus status helpers; support `--remote` (default from `SPRONGUS_API_URL`).
+  - Project resolution: commands accept an explicit `<project>`; if omitted, use the active project from ConfigKV or env `SPRONGUS_PROJECT`.
 - API: Read endpoints (get/list/diff/export) and action endpoints (pull/push via Run enqueue).
 - Tests & Docs: Unit + e2e across providers; developer docs and examples.
 
@@ -93,15 +99,15 @@ Implement the Script slice that:
 - flags: `-target <providerId>`, `-remote`
 - warn if provider is read-only
 - [ ] `sprongus script show <project>`
-- flags: `-json` (full document), `-tree` (pretty tree), `-flat` (beats only)
+- flags: `--json` (full document), `--tree` (pretty tree), `--flat` (beats only)
 - [ ] `sprongus script versions <project>`
-- flags: `-limit`, `-json`
+- flags: `--limit`, `--json`
 - [ ] `sprongus script diff <project> --from <ver> --to <ver>`
 - output op counts + sample lines
 - [ ] `sprongus script export <project> --format <txt|md> --out <path>`
 - [ ] `sprongus script status <project>`
 - shows current doc hash, last pull/push time, provider info
-- [ ] Unit/e2e tests: pull/diff/write/export (SQLite local) + `-remote` mock
+- [ ] Unit/e2e tests: pull/diff/write/export (SQLite local) + `--remote` mock
 
 ## To-Do (API)
 

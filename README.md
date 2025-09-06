@@ -42,7 +42,7 @@ Repository Layout
 - `apps/cli`: oclif entry `src/bin/run.ts`; commands under `src/commands/`.
 - `packages/core`: Library entry `src/index.ts`.
 - `packages/db`: DB entry `src/index.ts`; Drizzle schema/migrations to be added.
-- `mvp_roadmap/`: Planning docs for each slice (links below).
+- `docs/mvp_roadmap/`: Planning docs for each slice (links below).
 
 Development
 
@@ -79,23 +79,23 @@ Testing Conventions
 MVP Roadmap (Slices)
 
 - Project Management: seed schema + commands to create/update/select projects.
-  - File: `mvp_roadmap/Project Management 261ae4aa3620806d929df43e8bc73dc9.md`
+  - Doc: [docs/mvp_roadmap/06_Project_Management.md](docs/mvp_roadmap/06_Project_Management.md)
 - Config: system key/value store exposed via CLI/API.
-  - File: `mvp_roadmap/Config Slice 262ae4aa36208070ae61e8d39b250916.md`
+  - Doc: [docs/mvp_roadmap/01_Config_Slice.md](docs/mvp_roadmap/01_Config_Slice.md)
 - Secrets: encrypted key/value with envelope encryption; masking by default.
-  - File: `mvp_roadmap/Secrets Slice 262ae4aa3620800cb44bdfd2a8e56a55.md`
+  - Doc: [docs/mvp_roadmap/02_Secrets_Slice.md](docs/mvp_roadmap/02_Secrets_Slice.md)
 - Provider Profiles: non-secret provider config + links to secrets; resolve credentials at runtime.
-  - File: `mvp_roadmap/Provider Slice 262ae4aa3620807db937cdb4c240712a.md`
+  - Doc: [docs/mvp_roadmap/03_Provider_Slice.md](docs/mvp_roadmap/03_Provider_Slice.md)
 - Schema Presets: reusable, versioned field definitions (storyboard/assets/citations/custom).
-  - File: `mvp_roadmap/Schema Preset Slice 262ae4aa36208095b76cd4f36b9f4127.md`
+  - Doc: [docs/mvp_roadmap/04_Schema_Preset_Slice.md](docs/mvp_roadmap/04_Schema_Preset_Slice.md)
 - Script: pull/parse/diff script documents from providers; versioning + exports.
-  - File: `mvp_roadmap/Script Slice 262ae4aa362080b7b382ef48065b4acc.md`
+  - Doc: [docs/mvp_roadmap/07_Script_Slice.md](docs/mvp_roadmap/07_Script_Slice.md)
 - Storyboard: materialized storyboard synced from Script; CRUD, presets, exports, provider apply.
-  - File: `mvp_roadmap/Storyboard Slice 262ae4aa3620809db46eed1c1bc23008.md`
+  - Doc: [docs/mvp_roadmap/08_Storyboard_Slice.md](docs/mvp_roadmap/08_Storyboard_Slice.md)
 - Aux Tables: flexible per-project tables (assets/citations/custom) with presets and provider sync.
-  - File: `mvp_roadmap/Aux Table Slice 262ae4aa362080f3a5e5e625d89e0d33.md`
+  - Doc: [docs/mvp_roadmap/09_Aux_Table_Slice.md](docs/mvp_roadmap/09_Aux_Table_Slice.md)
 - Runs: background job tracking (enqueue, claim, succeed/fail, idempotency) for pull/sync actions.
-  - File: `mvp_roadmap/Run Table Slice 262ae4aa362080958c49eb5c1fc4db31.md`
+  - Doc: [docs/mvp_roadmap/05_Run_Table_Slice.md](docs/mvp_roadmap/05_Run_Table_Slice.md)
 
 Planned Stack Details
 

@@ -8,11 +8,16 @@ Docs: DB Table Schemas (https://www.notion.so/DB-Table-Schemas-262ae4aa36208003a
 
 Implement a system-wide secure secrets store (SecretKV) used by both CLI and API. Values are encrypted at rest via envelope encryption and scoped to user, project, or system. CRUD flows exist, but reads are tightly controlled (masked by default, optional one-time reveal).
 
+Runtime model:
+
+- CLI: local SQLite database (no server required).
+- API: Postgres database for multi-user/remote use.
+
 ## Scope
 
 - DB: Add `SecretKV` with per-dialect migrations (SQLite + Postgres). Encrypt values before persistence.
 - Core: Provide `SecretsService` with encryption, validation, scoping, rotation, and audit hooks.
-- CLI: Add `sprongus secrets` commands (set/get/unset/list/import) with safe output and `remote` support; prefer OS keychain where available.
+- CLI: Add `sprongus secrets` commands (set/get/unset/list/import) with safe output and `--remote` support; prefer OS keychain where available.
 - API: Expose `/v1/secrets` endpoints with strict auth scopes, masking-by-default, and one-time reveal tokens.
 
 ## Threat Model & Design Choices
@@ -60,13 +65,13 @@ Implement a system-wide secure secrets store (SecretKV) used by both CLI and API
 
 ## To-Do (CLI)
 
-- [ ] `sprongus secrets set <scope> <key> <value>` (supports `stdin`, `file`, `json`)
-- [ ] `sprongus secrets get <scope> <key>` (masked by default; `-reveal` prompts confirmation)
+- [ ] `sprongus secrets set <scope> <key> <value>` (supports `--stdin`, `--file`, `--json`)
+- [ ] `sprongus secrets get <scope> <key>` (masked by default; `--reveal` prompts confirmation)
 - [ ] `sprongus secrets unset <scope> <key>`
-- [ ] `sprongus secrets list <scope>` (`prefix`, `meta`, never prints values)
+- [ ] `sprongus secrets list <scope>` (`--prefix`, `--meta`, never prints values)
 - [ ] `sprongus secrets import --file <path> [--merge|--replace]`
 - [ ] `sprongus secrets export <scope> [--prefix] [--bundle]` (bundle = encrypted, safe to move)
-- [ ] `-remote` flag parity with ConfigKV
+- [ ] `--remote` flag parity with ConfigKV (default from `SPRONGUS_API_URL` or `http://localhost:3000`)
 - [ ] Prefer OS keychain (Keytar) locally; fallback to SQLite vault (still encrypted)
 - [ ] Unit tests incl. reveal prompts and piping via stdin
 

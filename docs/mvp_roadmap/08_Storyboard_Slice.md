@@ -11,6 +11,11 @@ Implement the Storyboard slice that
 2. Keeps it in one-way sync with the current ScriptDocument
 3. Reserves row-level production metadata (extras, assets, citations). Provide CRUD for rows, schema-preset validation, and exports. Expose via CLI/API and integrate with the Run/job system.
 
+Runtime model:
+
+- CLI: local SQLite storage for storyboard rows.
+- API: Postgres storage for remote multi-user operations.
+
 ## Scope
 
 - DB: Portable tables for storyboard rows and (optional) row history, designed for JSON-friendly “extras” and ID arrays for assets/citations.
@@ -105,17 +110,18 @@ Implement the Storyboard slice that
 ## To-Do (CLI)
 
 - [ ] `sprongus storyboard sync <project>`
-- Flags: `-provider <id>`, `-preset <label@version>`, `-remote`
+- Flags: `--provider <id>`, `--preset <label@version>`, `--remote`
 - Prints change summary; suggests a `runs tail` if enqueued remotely
 - [ ] `sprongus storyboard list <project>`
-- Flags: `-q <substr>`, `-limit`, `-json`, `-columns <comma>`, `-filter <k=v>` (works on extras keys)
+- Flags: `--q <substr>`, `--limit`, `--json`, `--columns <comma>`, `--filter <k=v>` (works on extras keys)
 - [ ] `sprongus storyboard show <project> <rowId> [--json]`
 - [ ] `sprongus storyboard update <project> <rowId> --set key=value` (extras)
-- Multi `-set` allowed; supports `-json` payload
+- Multi `--set` allowed; supports `--json` payload
 - [ ] `sprongus storyboard link-assets <project> <rowId> --add <id,id,...> [--remove <...>]`
 - [ ] `sprongus storyboard link-citations <project> <rowId> --add <id,id,...> [--remove <...>]`
 - [ ] `sprongus storyboard export <project> --format csv|json --out <path>`
-- [ ] All commands support `-remote`; unit/e2e tests (SQLite local + mock API)
+- [ ] All commands support `--remote` (default from `SPRONGUS_API_URL`); unit/e2e tests (SQLite local + mock API)
+- Project resolution: commands accept explicit `<project>`; if omitted, use active project from ConfigKV or env `SPRONGUS_PROJECT`.
 
 ## To-Do (API)
 

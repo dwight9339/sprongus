@@ -7,6 +7,11 @@ Area: API, CLI, Core, DB
 
 Add a `ProviderProfile` slice that captures non-sensitive connection details for any provider (Notion, Obsidian, Google Docs, etc.). All secrets (API keys, OAuth refresh tokens, private keys) live in `SecretKV`. Profiles reference secrets by stable names so you can rotate or swap credentials without editing the profile document.
 
+Runtime model:
+
+- CLI: local SQLite database for provider/profile management.
+- API: Postgres database; same behaviors exposed via HTTP.
+
 - More info
   ## Model & Storage Strategy
   ### Design principles
@@ -69,7 +74,7 @@ Add a `ProviderProfile` slice that captures non-sensitive connection details for
   - `list [--provider <id>] [--owner ...]` (shows masked secret refs)
   - `show <profile>` (dump config + keyNames; never prints values)
   - `update <profile> --config-file <json>`
-  - All commands support `-remote` to hit the API.
+  - All commands support `--remote` to hit the API (default from `SPRONGUS_API_URL` or `http://localhost:3000`).
   ### API (`/v1/providers`)
   - `POST /v1/providers` → create profile (validates provider id, config shape)
   - `GET /v1/providers` → list (filters: provider, owner, name)

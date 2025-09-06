@@ -8,6 +8,11 @@ Docs: DB Table Schemas (https://www.notion.so/DB-Table-Schemas-262ae4aa36208003a
 
 Add a system-level `Run` model to track background/long-running jobs across CLI and API (e.g., script.pull, sync.storyboard). Supports idempotent enqueueing, state transitions, basic retry metadata, and result references. Expose CRUD-ish read endpoints and “enqueue/cancel” actions; workers update status.
 
+Runtime model:
+
+- CLI: records runs in local SQLite for local operations.
+- API: persists runs in Postgres; remote enqueue returns a run id the CLI can tail via `--remote`.
+
 ## Scope
 
 - DB: Create `Run` table with portable columns; JSON `input` (TEXT in SQLite, JSONB in Postgres), indexes for query patterns, optional lightweight retry/attempt fields.
@@ -73,7 +78,7 @@ Add a system-level `Run` model to track background/long-running jobs across CLI 
 - [ ] `sprongus runs list [--project <id>] [--state <s>] [--kind <k>] [--limit <n>] [--since <ISO>] [--json]`
 - [ ] `sprongus runs cancel <id>` (confirm prompt)
 - [ ] `sprongus runs tail <id>` (polls status; prints final outputRef/error)
-- [ ] Add `-remote` support for all; unit/e2e tests (local SQLite + mock API).
+- [ ] Add `--remote` support for all (default from `SPRONGUS_API_URL`); unit/e2e tests (local SQLite + mock API).
 
 ## To-Do (API)
 

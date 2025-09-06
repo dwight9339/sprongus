@@ -8,6 +8,11 @@ Docs: DB Table Schemas (https://www.notion.so/DB-Table-Schemas-262ae4aa36208003a
 
 Add a `SchemaPreset` slice for reusable, versioned virtual column sets (e.g., storyboard/assets/citations/custom). Presets are stored centrally, validated with Zod, and consumable by both CLI and API for project initialization and migrations.
 
+Runtime model:
+
+- CLI: local SQLite storage for presets during local workflows.
+- API: Postgres storage backing remote preset management.
+
 ## Scope
 
 - DB: Create `SchemaPreset` table with cross-dialect migrations (TEXT in SQLite, JSONB in Postgres for `definition`).
@@ -63,7 +68,7 @@ Add a `SchemaPreset` slice for reusable, versioned virtual column sets (e.g., st
 - [ ] `sprongus schema preset show <id|label@version> [--json]`
 - [ ] `sprongus schema preset import --file <path> [--merge|--replace]`
 - [ ] `sprongus schema preset export [--kind <kind>] [--label <prefix>] [--json]`
-- [ ] `-remote` support for all; unit tests for local SQLite and mock API
+- [ ] `--remote` support for all (default from `SPRONGUS_API_URL`); unit tests for local SQLite and mock API
 
 ## To-Do (API)
 

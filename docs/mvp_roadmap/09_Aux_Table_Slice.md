@@ -7,6 +7,11 @@ Area: API, CLI, Core, DB
 
 Implement the Aux Tables slice for project-scoped, flexible metadata tables (e.g., assets, citations, or custom). Aux entries are schema-validated via SchemaPresets, cached locally, optionally backed by a remote provider, and linked from Storyboard rows by ID (not embedded). Provide CRUD, import/export, and provider sync. Expose via CLI/API; integrate with Runs for long operations.
 
+Runtime model:
+
+- CLI: local SQLite storage for aux entries.
+- API: Postgres storage for remote multi-user workflows.
+
 ## Scope
 
 - DB: A single portable `AuxEntries` table (plus optional history), JSON-friendly payload, and indexes for common queries.
@@ -101,7 +106,8 @@ Implement the Aux Tables slice for project-scoped, flexible metadata tables (e.g
 - [ ] `sprongus aux import <project> <tableName> --file <path> [--merge|--replace]`
 - [ ] `sprongus aux export <project> <tableName> --format json|csv --out <path>`
 - [ ] `sprongus aux sync <project> <tableName> [--provider <id>] [--remote]` (enqueues Run if remote)
-- [ ] All commands support `-remote`; unit/e2e tests (SQLite local + mock API)
+- [ ] All commands support `--remote` (default from `SPRONGUS_API_URL`); unit/e2e tests (SQLite local + mock API)
+- Project resolution: commands accept explicit `<project>`; if omitted, use active project from ConfigKV or env `SPRONGUS_PROJECT`.
 
 ## To-Do (API)
 
