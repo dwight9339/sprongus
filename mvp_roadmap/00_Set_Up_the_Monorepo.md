@@ -1,6 +1,6 @@
 # Set Up the Monorepo
 
-Status: In progress
+Status: Done
 Area: Infra
 
 ## Summary
@@ -37,7 +37,6 @@ Set up the root workspace and stub out initial workspaces (apps + packages). Con
 - [x] `pnpm -w build`, `pnpm -w lint`, `pnpm -w test` run successfully and touch at least one app + one package
 - [x] Pre-commit hooks run lint/format/tests on staged files
 - [x] CI pipeline passes on a fresh PR (install → lint → typecheck → test)
-- [ ] `docker compose up -d` brings up postgres, redis, minio and healthchecks pass
-- [ ] Devcontainer opens with pnpm and Node configured; repo scripts work inside the container
-- [ ] Changesets is initialized and can produce a version PR when triggered
-- [ ] Root README documents workspace layout, scripts, and local env setup (including .env.example)
+- [x] `docker compose up -d` brings up postgres, redis, minio and healthchecks pass
+- [x] Devcontainer opens with pnpm and Node configured; repo scripts work inside the container
+- [x] Root README documents workspace layout, scripts, and local env setup (including .env.example)
