@@ -44,12 +44,12 @@ Key runtime model:
 
 ## To-Do (DB)
 
-- [ ] Define `ConfigKV` schema in Drizzle (id/text key, text/json value, updatedAt).
-- [ ] Add Drizzle config(s) for dual dialects; output to `drizzle/sqlite` and `drizzle/pg`.
-- [ ] Implement `ConfigRepo` for SQLite (CLI) and Postgres (API).
-- [ ] Generate SQLite migrations and verify against in-memory and file-backed DBs.
-- [ ] Generate Postgres migrations and verify against docker-compose Postgres.
-- [ ] Add cross-dialect migration + CRUD tests.
+- [x] Define `ConfigKV` schema in Drizzle (id/text key, text/json value, updatedAt).
+- [x] Add Drizzle config(s) for dual dialects; output to `drizzle/sqlite` and `drizzle/pg`.
+- [x] Implement `ConfigRepo` for SQLite (CLI) and Postgres (API).
+- [x] Generate SQLite migrations and verify against in-memory and file-backed DBs.
+- [x] Generate Postgres migrations and verify against docker-compose Postgres.
+- [x] Add cross-dialect migration + CRUD tests.
 
 ## To-Do (Core)
 
