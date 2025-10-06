@@ -3,6 +3,8 @@ import { afterAll, beforeAll, beforeEach, describe, expect, it } from "vitest";
 import { Pool } from "pg";
 import { drizzle } from "drizzle-orm/node-postgres";
 
+import type { ConfigEntry } from "@sprongus/core";
+
 import { createPostgresConfigRepo } from "./configRepo.js";
 import * as schema from "../schema/pg/index.js";
 
@@ -75,7 +77,7 @@ describe.skipIf(!connectionString)("PostgresConfigRepo", () => {
     });
 
     const list = await repo.list({ prefix: "feature." });
-    expect(list.map((item) => item.key)).toEqual([
+    expect(list.map((item: ConfigEntry) => item.key)).toEqual([
       "feature.alpha",
       "feature.beta",
     ]);

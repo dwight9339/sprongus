@@ -1,4 +1,13 @@
-export * from "./config/types.js";
+export type {
+  ConfigEntry,
+  ConfigRepo,
+  ConfigRecord,
+  ConfigValue,
+  ExportConfigOptions,
+  ImportConfigOptions,
+  ImportMode,
+  ListConfigOptions,
+} from "@sprongus/core";
 export {
   createSqliteClient,
   type CreateSqliteClientOptions,

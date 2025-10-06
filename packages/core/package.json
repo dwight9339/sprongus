@@ -17,6 +17,9 @@
     "dist"
   ],
   "sideEffects": false,
+  "dependencies": {
+    "zod": "^3.24.1"
+  },
   "scripts": {
     "build": "tsc -p tsconfig.build.json",
     "typecheck": "tsc -p tsconfig.build.json --noEmit"

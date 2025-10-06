@@ -23,6 +23,7 @@
     "test": "node ./scripts/run-tests.mjs"
   },
   "dependencies": {
+    "@sprongus/core": "workspace:*",
     "better-sqlite3": "^11.7.0",
     "drizzle-kit": "^0.31.5",
     "drizzle-orm": "^0.44.6",

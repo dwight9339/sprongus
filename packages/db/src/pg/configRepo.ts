@@ -7,7 +7,7 @@ import type {
   ExportConfigOptions,
   ImportConfigOptions,
   ListConfigOptions,
-} from "../config/types.js";
+} from "@sprongus/core";
 import { configKvTable } from "../schema/pg/configKv.js";
 import type { PostgresDrizzleDatabase } from "./client.js";
 
@@ -15,7 +15,7 @@ function parseEntry(row: typeof configKvTable.$inferSelect): ConfigEntry {
   return {
     id: row.id,
     key: row.key,
-    value: row.value,
+    value: row.value as ConfigValue,
     updatedAt: row.updatedAt,
   };
 }
@@ -103,19 +103,17 @@ export class PostgresConfigRepo implements ConfigRepo {
       const results: ConfigEntry[] = [];
       for (const key of keys) {
         const now = new Date();
+        const rawValue = records[key]!;
         await tx
           .insert(configKvTable)
           .values({
             key,
-            value: records[key],
+            value: rawValue,
             updatedAt: now,
           })
           .onConflictDoUpdate({
             target: configKvTable.key,
-            set: {
-              value: records[key],
-              updatedAt: now,
-            },
+            set: { value: rawValue, updatedAt: now },
           });
 
         const [row] = await tx
@@ -149,7 +147,7 @@ export class PostgresConfigRepo implements ConfigRepo {
 
     const rows = await query;
     return rows.reduce<Record<string, ConfigValue>>((acc, row) => {
-      acc[row.key] = row.value;
+      acc[row.key] = row.value as ConfigValue;
       return acc;
     }, {});
   }

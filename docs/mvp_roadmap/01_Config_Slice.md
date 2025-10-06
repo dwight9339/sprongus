@@ -53,10 +53,10 @@ Key runtime model:
 
 ## To-Do (Core)
 
-- [ ] Create `ConfigService` with methods: `get(key)`, `set(key,value)`, `unset(key)`, `list(prefix?)`, `import(items, mode)`, `export(prefix?)`.
-- [ ] Define a storage interface `ConfigRepo` to decouple Core from DB drivers.
-- [ ] Add Zod schema to validate key format (`^[a-z0-9._:-]+$`) and JSON values.
-- [ ] Export types + service from `core` barrel for use by CLI and API.
+- [x] Create `ConfigService` with methods: `get(key)`, `set(key,value)`, `unset(key)`, `list(prefix?)`, `import(items, mode)`, `export(prefix?)`.
+- [x] Define a storage interface `ConfigRepo` to decouple Core from DB drivers.
+- [x] Add Zod schema to validate key format (`^[a-z0-9._:-]+$`) and JSON values.
+- [x] Export types + service from `core` barrel for use by CLI and API.
 
 ## To-Do (CLI)
 

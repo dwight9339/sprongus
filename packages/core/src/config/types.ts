@@ -1,4 +1,10 @@
-export type ConfigValue = unknown;
+export type JsonPrimitive = string | number | boolean | null;
+export type JsonValue =
+  | JsonPrimitive
+  | JsonValue[]
+  | { [key: string]: JsonValue };
+
+export type ConfigValue = JsonValue;
 
 export interface ConfigEntry {
   id: number;
@@ -35,3 +41,5 @@ export interface ConfigRepo {
   ): Promise<ConfigEntry[]>;
   export(options?: ExportConfigOptions): Promise<Record<string, ConfigValue>>;
 }
+
+export type ConfigRecord = Record<string, ConfigValue>;

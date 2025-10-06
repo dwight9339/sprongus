@@ -7,7 +7,7 @@ import type {
   ExportConfigOptions,
   ImportConfigOptions,
   ListConfigOptions,
-} from "../config/types.js";
+} from "@sprongus/core";
 import { configKvTable } from "../schema/sqlite/configKv.js";
 import type { SqliteDrizzleDatabase } from "./client.js";
 
@@ -17,7 +17,7 @@ function serializeValue(value: ConfigValue): string {
 
 function parseValue(raw: string): ConfigValue {
   try {
-    return JSON.parse(raw);
+    return JSON.parse(raw) as ConfigValue;
   } catch {
     return raw;
   }
@@ -118,7 +118,8 @@ export class SqliteConfigRepo implements ConfigRepo {
       const results: ConfigEntry[] = [];
       for (const key of keys) {
         const timestamp = new Date().toISOString();
-        const serialized = serializeValue(records[key]);
+        const rawValue = records[key]!;
+        const serialized = serializeValue(rawValue);
         tx.insert(configKvTable)
           .values({
             key,

@@ -3,6 +3,8 @@ import { readFileSync, readdirSync } from "node:fs";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
+import type { ConfigEntry } from "@sprongus/core";
+
 import { createSqliteConfigRepo } from "./configRepo.js";
 import { createSqliteClient, type SqliteClient } from "./client.js";
 
@@ -63,14 +65,14 @@ describe.skipIf(!sqliteBindingsAvailable)("SqliteConfigRepo", () => {
     await repo.set("system.timezone", "UTC");
 
     const all = await repo.list();
-    expect(all.map((entry) => entry.key)).toEqual([
+    expect(all.map((entry: ConfigEntry) => entry.key)).toEqual([
       "feature.alpha",
       "feature.beta",
       "system.timezone",
     ]);
 
     const filtered = await repo.list({ prefix: "feature." });
-    expect(filtered.map((entry) => entry.key)).toEqual([
+    expect(filtered.map((entry: ConfigEntry) => entry.key)).toEqual([
       "feature.alpha",
       "feature.beta",
     ]);
