@@ -92,13 +92,13 @@ Key runtime model:
 
 ## To-Do (Tests & Docs)
 
-- [ ] Migration test: both SQLite and Postgres create/insert/query work (SQLite runs via Drizzle SQL fixtures; need automated Postgres runner tied to migrations).
+- [x] Migration test: both SQLite and Postgres create/insert/query work (SQLite runs via Drizzle SQL fixtures; need automated Postgres runner tied to migrations).
 - [x] Core service unit tests (Zod rejects bad keys/values; repo contract tests).
 - [x] CLI e2e tests: `set/get/unset/list` round-trip (SQLite + mocked remote).
 - [x] API e2e tests: Fastify inject for each endpoint.
-- [ ] Update `db` README: system vs project config split; dialects and migration folders.
-- [ ] Update `cli` README: usage examples for `sprongus config`; local DB path + overrides.
-- [ ] Update `api` docs/OpenAPI spec; document idempotency expectations.
+- [x] Update `db` README: system vs project config split; dialects and migration folders.
+- [x] Update `cli` README: usage examples for `sprongus config`; local DB path + overrides.
+- [x] Update `api` docs/OpenAPI spec; document idempotency expectations.
 
 ## DoD
 
@@ -106,4 +106,4 @@ Key runtime model:
 - [x] Core `ConfigService` passes unit tests.
 - [x] CLI commands operate locally and via `-remote`.
 - [x] API endpoints return correct responses, with validation + idempotency.
-- [ ] Documentation updated to reflect new system-level config support.
+- [x] Documentation updated to reflect new system-level config support.

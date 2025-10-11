@@ -28,5 +28,9 @@
     "drizzle-kit": "^0.31.5",
     "drizzle-orm": "^0.44.6",
     "pg": "^8.13.1"
+  },
+  "devDependencies": {
+    "@testcontainers/postgresql": "^11.7.1",
+    "testcontainers": "^11.7.1"
   }
 }
