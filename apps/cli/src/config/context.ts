@@ -4,6 +4,7 @@ import path from "node:path";
 import type { ConfigService } from "@sprongus/core";
 import { createConfigService } from "@sprongus/core";
 import {
+  CONFIG_KV_SQLITE_SCHEMA_SQL,
   createSqliteClient,
   createSqliteConfigRepo,
   type SqliteClient,
@@ -11,17 +12,6 @@ import {
 
 import { resolveLocalDbPath } from "./paths.js";
 import { createRemoteConfigRepo } from "./remote.js";
-
-const SQLITE_SCHEMA_SQL = `
-CREATE TABLE IF NOT EXISTS config_kv (
-  id integer PRIMARY KEY AUTOINCREMENT NOT NULL,
-  key text NOT NULL UNIQUE,
-  value text NOT NULL,
-  updated_at text NOT NULL DEFAULT CURRENT_TIMESTAMP
-);
-
-CREATE UNIQUE INDEX IF NOT EXISTS config_kv_key_unique ON config_kv (key);
-`;
 
 export interface CreateContextOptions {
   dbPath?: string;
@@ -45,7 +35,7 @@ async function createLocalContext(dbPath?: string): Promise<ConfigContext> {
   await ensureDirectoryFor(resolvedPath);
 
   const client: SqliteClient = createSqliteClient({ filePath: resolvedPath });
-  client.connection.exec(SQLITE_SCHEMA_SQL);
+  client.connection.exec(CONFIG_KV_SQLITE_SCHEMA_SQL);
 
   const repo = createSqliteConfigRepo(client.db);
   const service = createConfigService({ repo });

@@ -12,15 +12,20 @@
       "settings": {
         "terminal.integrated.defaultProfile.linux": "bash"
       },
-      "extensions": ["ms-vscode.vscode-typescript-next"]
+      "extensions": [
+        "ms-vscode.vscode-typescript-next",
+        "openai.chatgpt",
+        "anthropic.claude-code"
+      ]
     }
   },
   "mounts": [
     "source=codex_config,target=/home/node/.codex,type=volume",
+    "source=claude_config,target=/home/node/.claude,type=volume",
     "source=gh_config,target=/home/node/.config/gh,type=volume"
   ],
-  "postCreateCommand": "bash -lc \"set -e; mkdir -p ~/.codex ~/.config/gh; sudo chown -R node:node ~/.codex ~/.config/gh; chmod 700 ~/.codex ~/.config/gh; sudo usermod -aG docker node; pnpm install\"",
-  "postStartCommand": "bash -lc \"sudo chown -R node:node ~/.codex ~/.config/gh || true; (docker network inspect sprongus_net >/dev/null 2>&1 || sudo docker network create sprongus_net >/dev/null 2>&1); sudo docker network connect sprongus_net $(hostname) >/dev/null 2>&1 || true\"",
+  "postCreateCommand": "bash -lc \"set -e; mkdir -p ~/.codex ~/.claude ~/.config/gh; sudo chown -R node:node ~/.codex ~/.claude ~/.config/gh; chmod 700 ~/.codex ~/.claude ~/.config/gh; sudo usermod -aG docker node; pnpm install\"",
+  "postStartCommand": "bash -lc \"sudo chown -R node:node ~/.codex ~/.claude ~/.config/gh || true; (docker network inspect sprongus_net >/dev/null 2>&1 || sudo docker network create sprongus_net >/dev/null 2>&1); sudo docker network connect sprongus_net $(hostname) >/dev/null 2>&1 || true\"",
   "containerEnv": {
     "DATABASE_URL": "postgres://postgres:postgres@postgres:5432/sprongus",
     "REDIS_URL": "redis://redis:6379",

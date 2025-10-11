@@ -68,9 +68,18 @@ importers:
 
   apps/api:
     dependencies:
+      "@sprongus/core":
+        specifier: workspace:*
+        version: link:../../packages/core
+      "@sprongus/db":
+        specifier: workspace:*
+        version: link:../../packages/db
       fastify:
         specifier: ^4.29.1
         version: 4.29.1
+      zod:
+        specifier: ^3.24.0
+        version: 3.25.76
 
   apps/cli:
     dependencies:

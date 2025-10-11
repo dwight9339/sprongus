@@ -80,30 +80,30 @@ Key runtime model:
 
 ## To-Do (API)
 
-- [ ] `GET /v1/config` (list; supports `prefix`, `limit`, `offset`, `includeValues`; respond with `ConfigEntry[]` and ISO8601 `updatedAt` to satisfy CLI contract).
-- [ ] `GET /v1/config/:key` (return 200 with `ConfigEntry`; 404 should map to CLI "not found").
-- [ ] `PUT /v1/config/:key` (upsert via `{ value }` body; respond with updated `ConfigEntry`; treat as idempotent by state; defer full `Idempotency-Key` infra).
-- [ ] `DELETE /v1/config/:key` (accept repeated deletes; return 204; CLI tolerates 404 but avoid when possible).
-- [ ] `POST /v1/config:import` (accept `{ data: {key:value}, mode }`; respond with sorted `ConfigEntry[]`).
-- [ ] `GET /v1/config:export` (return `{ [key]: value }` map; honor `prefix` query).
-- [ ] Add request/response validation with Zod (optional `fastify-type-provider-zod`).
-- [ ] Wire endpoints to core `ConfigService` and DB-backed `ConfigRepo`.
-- [ ] Initialize DB connection on boot; close on shutdown.
+- [x] `GET /v1/config` (list; supports `prefix`, `limit`, `offset`, `includeValues`; respond with `ConfigEntry[]` and ISO8601 `updatedAt` to satisfy CLI contract).
+- [x] `GET /v1/config/:key` (return 200 with `ConfigEntry`; 404 should map to CLI "not found").
+- [x] `PUT /v1/config/:key` (upsert via `{ value }` body; respond with updated `ConfigEntry`; treat as idempotent by state; defer full `Idempotency-Key` infra).
+- [x] `DELETE /v1/config/:key` (accept repeated deletes; return 204; CLI tolerates 404 but avoid when possible).
+- [x] `POST /v1/config:import` (accept `{ data: {key:value}, mode }`; respond with sorted `ConfigEntry[]`).
+- [x] `GET /v1/config:export` (return `{ [key]: value }` map; honor `prefix` query).
+- [x] Add request/response validation with Zod (optional `fastify-type-provider-zod`).
+- [x] Wire endpoints to core `ConfigService` and DB-backed `ConfigRepo`.
+- [x] Initialize DB connection on boot; close on shutdown.
 
 ## To-Do (Tests & Docs)
 
 - [ ] Migration test: both SQLite and Postgres create/insert/query work (SQLite runs via Drizzle SQL fixtures; need automated Postgres runner tied to migrations).
 - [x] Core service unit tests (Zod rejects bad keys/values; repo contract tests).
 - [x] CLI e2e tests: `set/get/unset/list` round-trip (SQLite + mocked remote).
-- [ ] API e2e tests: Fastify inject for each endpoint.
+- [x] API e2e tests: Fastify inject for each endpoint.
 - [ ] Update `db` README: system vs project config split; dialects and migration folders.
 - [ ] Update `cli` README: usage examples for `sprongus config`; local DB path + overrides.
 - [ ] Update `api` docs/OpenAPI spec; document idempotency expectations.
 
 ## DoD
 
-- [ ] ConfigKV table exists and migrates in SQLite + Postgres.
-- [ ] Core `ConfigService` passes unit tests.
-- [ ] CLI commands operate locally and via `-remote`.
-- [ ] API endpoints return correct responses, with validation + idempotency.
+- [x] ConfigKV table exists and migrates in SQLite + Postgres.
+- [x] Core `ConfigService` passes unit tests.
+- [x] CLI commands operate locally and via `-remote`.
+- [x] API endpoints return correct responses, with validation + idempotency.
 - [ ] Documentation updated to reflect new system-level config support.

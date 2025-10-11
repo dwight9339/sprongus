@@ -15,6 +15,7 @@ export {
   type SqliteDrizzleDatabase,
 } from "./sqlite/client.js";
 export { createSqliteConfigRepo } from "./sqlite/configRepo.js";
+export { CONFIG_KV_SQLITE_SCHEMA_SQL } from "./sqlite/schemaSql.js";
 export {
   createPostgresClient,
   type CreatePostgresClientOptions,
