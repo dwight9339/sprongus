@@ -77,6 +77,12 @@ importers:
       "@oclif/core":
         specifier: ^3.27.0
         version: 3.27.0
+      "@sprongus/core":
+        specifier: workspace:*
+        version: link:../../packages/core
+      "@sprongus/db":
+        specifier: workspace:*
+        version: link:../../packages/db
 
   packages/core:
     dependencies:

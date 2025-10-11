@@ -25,6 +25,8 @@
     "start": "node ./dist/bin/run.js"
   },
   "dependencies": {
-    "@oclif/core": "^3.27.0"
+    "@oclif/core": "^3.27.0",
+    "@sprongus/core": "workspace:*",
+    "@sprongus/db": "workspace:*"
   }
 }
