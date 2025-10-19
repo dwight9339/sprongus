@@ -9,6 +9,13 @@
     // See also https://aka.ms/tsconfig/module
     "module": "nodenext",
     "target": "esnext",
+    "baseUrl": ".",
+    "paths": {
+      "@sprongus/core": ["packages/core/src/index.ts"],
+      "@sprongus/core/*": ["packages/core/src/*"],
+      "@sprongus/db": ["packages/db/src/index.ts"],
+      "@sprongus/db/*": ["packages/db/src/*"]
+    },
     "types": [],
     // For nodejs:
     // "lib": ["esnext"],
