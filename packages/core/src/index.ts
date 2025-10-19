@@ -1,10 +1,26 @@
-/**
- * Core library stub.
- * Add exports here as the core grows.
- */
-
-export const version = "0.0.0";
-
-export function noop(): void {
-  // intentionally empty
-}
+export { CONFIG_KEY_REGEX } from "./config/shared.js";
+export {
+  configKeySchema,
+  configRecordSchema,
+  configValueSchema,
+  exportOptionsSchema,
+  importOptionsSchema,
+  listOptionsSchema,
+} from "./config/schemas.js";
+export {
+  createConfigService,
+  type ConfigService,
+  type CreateConfigServiceOptions,
+} from "./config/service.js";
+export type {
+  ConfigEntry,
+  ConfigRepo,
+  ConfigRecord,
+  ConfigValue,
+  ExportConfigOptions,
+  ImportConfigOptions,
+  ImportMode,
+  JsonPrimitive,
+  JsonValue,
+  ListConfigOptions,
+} from "./config/types.js";

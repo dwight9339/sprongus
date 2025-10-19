@@ -1,7 +1,12 @@
+import path from "node:path";
+import { fileURLToPath } from "node:url";
+
 import js from "@eslint/js";
 import eslintConfigPrettier from "eslint-config-prettier";
 import globals from "globals";
 import tseslint from "typescript-eslint";
+
+const tsconfigRootDir = path.dirname(fileURLToPath(import.meta.url));
 
 // ESLint 9+ flat config with TypeScript support
 export default tseslint.config(
@@ -37,8 +42,12 @@ export default tseslint.config(
     files: ["**/*.{ts,tsx}"],
     languageOptions: {
       parserOptions: {
-        // Enable type-aware linting without specifying project paths explicitly
-        projectService: true,
+        project: [
+          "./tsconfig.json",
+          "./packages/*/tsconfig.json",
+          "./apps/*/tsconfig.json",
+        ],
+        tsconfigRootDir,
       },
     },
   },
